@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_26_165546) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_27_173646) do
   create_table "pedidos", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "num_pedido"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["num_pedido"], name: "index_pedidos_on_num_pedido", unique: true
   end
 
 end

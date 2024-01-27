@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", :as => :rails_health_check
 
   root "pedidos#index"
+
+  get "pedidos", to: "pedidos#index"
+  post "pedidos", to: "pedidos#create"
 end

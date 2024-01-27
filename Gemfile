@@ -44,6 +44,7 @@ group :development, :test do
   gem "debug", platforms: %i[mri windows]
   gem "rspec-rails"
   gem "rswag-specs"
+  gem "database_cleaner"
   gem "factory_bot_rails"
 
   gem "standard"

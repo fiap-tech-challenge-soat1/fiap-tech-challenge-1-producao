@@ -5,13 +5,10 @@ class PedidosController < ApplicationController
   end
 
   def create
-    pedido = Pedido.new(
-      num_pedido: pedido_params[:pedido],
-      status: pedido_params[:status]
-    )
+    @pedido = Pedido.new(pedido_params)
 
-    if pedido.save!
-      render json: pedido, status: :ok
+    if @pedido.save!
+      render "show", status: :created
     end
   end
 
@@ -21,6 +18,6 @@ class PedidosController < ApplicationController
   private
 
   def pedido_params
-    params.permit(:pedido, :status)
+    params.permit(:num_pedido, :status)
   end
 end

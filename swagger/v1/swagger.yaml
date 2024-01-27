@@ -50,6 +50,32 @@ paths:
               - num_pedido
               - status
         required: true
+  "/pedidos/{num_pedido}":
+    parameters:
+    - name: num_pedido
+      in: path
+      description: Número do Pedido
+      required: true
+      schema:
+        type: integer
+    put:
+      summary: Atualizar status do pedido
+      tags:
+      - Pedidos
+      parameters:
+      - name: status
+        in: query
+        description: Novo status do pedido
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Status do pedido atualizado com sucesso
+        '404':
+          description: Pedido não encontrado
+        '422':
+          description: Unprocessable Entity
 servers:
 - url: http://{defaultHost}
   variables:

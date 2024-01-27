@@ -8,4 +8,5 @@ Rails.application.routes.draw do
 
   get "pedidos", to: "pedidos#index"
   post "pedidos", to: "pedidos#create"
+  put "pedidos/:num_pedido", to: "pedidos#update"
 end

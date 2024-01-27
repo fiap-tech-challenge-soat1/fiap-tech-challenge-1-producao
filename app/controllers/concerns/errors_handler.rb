@@ -2,11 +2,18 @@ module ErrorsHandler
   extend ActiveSupport::Concern
 
   included do
+    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     rescue_from ActiveRecord::RecordInvalid, with: :render_validation_exception
     rescue_from ActionDispatch::Http::Parameters::ParseError, with: :render_bad_request
   end
 
   private
+
+  def render_not_found(messages = "Not found")
+    messages = "Not found" unless messages.is_a?(String) || messages.is_a?(Array)
+
+    render json: {errors: Array.wrap(messages)}, status: :not_found
+  end
 
   def render_bad_request(messages = "Bad request")
     messages = "Bad request" unless messages.is_a?(String) || messages.is_a?(Array)

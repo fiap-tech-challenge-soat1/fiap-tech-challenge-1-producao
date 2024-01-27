@@ -3,4 +3,13 @@ class Pedido < ApplicationRecord
 
   validates :num_pedido, presence: true, uniqueness: true
   validates :status, presence: true
+
+  after_update :notificar_pedidos_api, if: :finalizado?
+
+  private
+
+  def notificar_pedidos_api
+    pedidos_api = PedidosApi::Client.new
+    pedidos_api.notificar(num_pedido)
+  end
 end

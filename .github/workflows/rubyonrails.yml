@@ -31,6 +31,7 @@ jobs:
       # Add or replace dependency steps here
       - name: Install Ruby and gems
         run: | 
+          gem install bundler
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
       # Add or replace database setup steps here

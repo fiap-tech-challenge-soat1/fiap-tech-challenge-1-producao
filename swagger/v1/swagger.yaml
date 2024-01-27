@@ -12,8 +12,22 @@ paths:
       responses:
         '200':
           description: lista de pedidos em producao
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    num_pedido:
+                      type: integer
+                    status:
+                      type: string
+                  required:
+                  - num_pedido
+                  - status
 servers:
-- url: https://{defaultHost}
+- url: http://{defaultHost}
   variables:
     defaultHost:
-      default: www.example.com
+      default: localhost:3000

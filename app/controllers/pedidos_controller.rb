@@ -1,12 +1,17 @@
 class PedidosController < ApplicationController
   def index
-    head :ok
+    @pedidos = Pedido.all
+    render "index"
   end
 
   def create
-    pedido = Pedido.new(pedido_params.merge(status: :recebido))
+    pedido = Pedido.new(
+      num_pedido: pedido_params[:pedido],
+      status: pedido_params[:status]
+    )
+
     if pedido.save!
-      render json: pedido
+      render json: pedido, status: :ok
     end
   end
 
@@ -16,6 +21,6 @@ class PedidosController < ApplicationController
   private
 
   def pedido_params
-    params.permit(:num_pedido, :status)
+    params.permit(:pedido, :status)
   end
 end

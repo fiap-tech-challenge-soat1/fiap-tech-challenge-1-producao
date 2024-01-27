@@ -21,7 +21,6 @@ RSpec.describe Pedido do
     end
 
     context "quando o pedido é atualizado para finalizado" do
-
       it "notifica a api de pedidos" do
         pedido = create(:pedido, status: :recebido)
 

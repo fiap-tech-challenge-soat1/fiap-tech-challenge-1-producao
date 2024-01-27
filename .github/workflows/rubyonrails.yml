@@ -26,6 +26,9 @@ jobs:
       RAILS_ENV: test
       DATABASE_URL: "mysql://root:password@localhost:3306/rails_test"
     steps:
+      - name: Print MySQL container logs
+        run: docker logs ${{ job.services.mysql.id }}
+
       - name: Checkout code
         uses: actions/checkout@v3
       # Add or replace dependency steps here

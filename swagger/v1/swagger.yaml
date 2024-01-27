@@ -61,7 +61,7 @@ paths:
     put:
       summary: Atualizar status do pedido
       tags:
-      - Pedidos
+      - Producao
       parameters:
       - name: status
         in: query

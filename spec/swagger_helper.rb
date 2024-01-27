@@ -24,7 +24,7 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: Rails.env.development? ? "http://{defaultHost}" : "https://{defaultHost}",
+          url: Rails.env.local? ? "http://{defaultHost}" : "https://{defaultHost}",
           variables: {
             defaultHost: {
               default: "localhost:3000"

@@ -54,7 +54,7 @@ RSpec.describe "Pedidos" do
       parameter name: :num_pedido, in: :path, type: :integer, description: "Número do Pedido"
 
       put "Atualizar status do pedido" do
-        tags "Pedidos"
+        tags "Producao"
         consumes "application/json"
         produces "application/json"
         parameter name: :status, in: :query, type: :string, description: "Novo status do pedido", required: true

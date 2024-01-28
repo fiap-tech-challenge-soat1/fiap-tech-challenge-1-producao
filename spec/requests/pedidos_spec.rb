@@ -12,9 +12,10 @@ RSpec.describe "Pedidos" do
             type: :object,
             properties: {
               num_pedido: {type: :integer},
-              status: {type: :string}
+              status: {type: :string},
+              itens: {type: :array},
             },
-            required: %w[num_pedido status]
+            required: %w[num_pedido status itens]
           }
         run_test!
       end
@@ -34,7 +35,7 @@ RSpec.describe "Pedidos" do
       }
 
       response "201", "Pedido enviado para producao com sucesso" do
-        let(:pedido_params) { {num_pedido: 123, status: "recebido"} }
+        let(:pedido_params) { {num_pedido: 123, itens_attributes: [{nome: 'X-Burder', quantidade: 3, observacao: 'Sem picles'}]} }
         run_test!
       end
 

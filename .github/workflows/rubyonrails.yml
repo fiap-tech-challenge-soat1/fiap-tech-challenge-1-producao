@@ -29,12 +29,10 @@ jobs:
       - name: Checkout code
       - uses: actions/checkout@v4
 
-      - name: Setup Ruby
+      - name: Setup Ruby and install dependencies
         uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
         with:
           ruby-version: '3.2'
-
-      - name: Install dependencies
         run: bundle install
 
       - name: Set up database schema

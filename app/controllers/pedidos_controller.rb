@@ -7,7 +7,7 @@ class PedidosController < ApplicationController
   end
 
   def create
-    @pedido = Pedido.new(pedido_params)
+    @pedido = Pedido.new(create_params)
 
     if @pedido.save!
       render "show", status: :created
@@ -15,7 +15,7 @@ class PedidosController < ApplicationController
   end
 
   def update
-    return render "show", status: :ok if @pedido.update(status: params[:status])
+    return render "show", status: :ok if @pedido.update(update_params)
 
     head :unprocessable_entity
   end
@@ -26,7 +26,11 @@ class PedidosController < ApplicationController
     @pedido = Pedido.find_by!(num_pedido: params[:num_pedido])
   end
 
-  def pedido_params
+  def create_params
+    params.permit(:num_pedido, itens_attributes: [:nome, :quantidade, :observacao]).merge(status: Pedido::DEFAULT_STATUS)
+  end
+
+  def update_params
     params.permit(:num_pedido, :status)
   end
 end

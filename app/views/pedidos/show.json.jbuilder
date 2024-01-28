@@ -1,2 +1,1 @@
-json.num_pedido @pedido.num_pedido
-json.status @pedido.status
+json.partial! "pedidos/pedido", pedido: @pedido

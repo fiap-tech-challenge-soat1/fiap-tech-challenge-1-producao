@@ -44,11 +44,24 @@ paths:
               properties:
                 num_pedido:
                   type: integer
-                status:
-                  type: string
+                  example: 1
+                itens_attributes:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      nome:
+                        type: string
+                        example: "X-Burger"
+                      quantidade:
+                        type: integer
+                        example: 1
+                      observacao:
+                        type: string
+                        example: "Sem picles"
               required:
               - num_pedido
-              - status
+              - itens_attributes
         required: true
   "/pedidos/{num_pedido}":
     parameters:

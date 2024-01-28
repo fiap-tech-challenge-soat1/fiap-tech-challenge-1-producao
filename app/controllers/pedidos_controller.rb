@@ -31,6 +31,6 @@ class PedidosController < ApplicationController
   end
 
   def update_params
-    params.permit(:num_pedido)
+    params.permit(:num_pedido, :status)
   end
 end

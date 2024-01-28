@@ -41,6 +41,7 @@ jobs:
 
       - name: Set up database schema
         run: |
+          export RAILS_ENV=test
           bin/rails db:create
           bin/rails db:schema:load
 

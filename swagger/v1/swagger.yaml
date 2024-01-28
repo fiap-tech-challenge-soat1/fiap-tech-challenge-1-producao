@@ -109,7 +109,7 @@ components:
     StatusPedido:
       type: string
       enum:
-        - criando
+        - recebido
         - em_preparacao
         - pronto
         - finalizado

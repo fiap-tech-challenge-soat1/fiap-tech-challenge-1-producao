@@ -17,15 +17,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    num_pedido:
-                      type: integer
-                    status:
-                      type: string
-                  required:
-                  - num_pedido
-                  - status
+                  $ref: '#/components/schemas/Pedido'
     post:
       summary: Enviar pedido para producao
       tags:
@@ -44,11 +36,14 @@ paths:
               properties:
                 num_pedido:
                   type: integer
-                status:
-                  type: string
+                  example: 1
+                itens_attributes:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Item'
               required:
               - num_pedido
-              - status
+              - itens_attributes
         required: true
   "/pedidos/{num_pedido}":
     parameters:
@@ -68,7 +63,7 @@ paths:
         description: Novo status do pedido
         required: true
         schema:
-          type: string
+          $ref: '#/components/schemas/StatusPedido'
       responses:
         '200':
           description: Status do pedido atualizado com sucesso
@@ -81,3 +76,40 @@ servers:
   variables:
     defaultHost:
       default: localhost:3000
+
+components:
+  schemas:
+    Pedido:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Identificador local do pedido no sistema de produção
+        num_pedido:
+          type: string
+          description: Número do pedido global
+        status:
+          $ref: '#/components/schemas/StatusPedido'
+        itens:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+    Item:
+      type: object
+      properties:
+        nome:
+          type: string
+          example: "X-Burger"
+        observacao:
+          type: string
+          example: "Sem picles"
+        quantidade:
+          type: integer
+          example: 4
+    StatusPedido:
+      type: string
+      enum:
+        - criando
+        - em_preparacao
+        - pronto
+        - finalizado

@@ -24,7 +24,9 @@ jobs:
           MYSQL_ALLOW_EMPTY_PASSWORD: 1
     env:
       RAILS_ENV: test
-      DATABASE_URL: "mysql://root:password@localhost:3306/rails_test"
+      DB_USER: root
+      DB_PASSWORD: password
+      DB_HOST: localhost
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -32,11 +34,14 @@ jobs:
           fetch_depth: 0
 
       - name: Setup Ruby
-        uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
+        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
         with:
           ruby-version: '3.2.2'
+          bundler-cache: true
       - name: Install dependencies
-        run: bundle install
+        run: |
+          gem install mysql2
+          bundle install
 
       - name: Set up database schema
         run: |
@@ -50,15 +55,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
         with:
+          ruby-version: '3.2.2'
           bundler-cache: true
       # Add or replace any other lints here
       - name: Security audit dependencies
-        run: bin/bundler-audit --update
+        run: bundle exec bundler-audit --update
       - name: Security audit application code
-        run: bin/brakeman -q -w2
+        run: bundle exec brakeman -q -w2
       - name: Lint Ruby files
-        run: bin/rubocop --parallel
+        run: bundle exec rubocop --parallel

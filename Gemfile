@@ -51,6 +51,8 @@ group :development, :test do
   gem "rubocop-rails"
   gem "rubocop-rspec"
   gem "dotenv-rails"
+  gem "bundle-audit"
+  gem "brakeman"
 end
 
 group :test do

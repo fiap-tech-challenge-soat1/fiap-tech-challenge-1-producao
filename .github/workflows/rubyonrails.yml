@@ -26,7 +26,6 @@ jobs:
       RAILS_ENV: test
       DB_USER: root
       DB_PASSWORD: password
-      DB_HOST: localhost
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -38,10 +37,6 @@ jobs:
         with:
           ruby-version: '3.2.2'
           bundler-cache: true
-      - name: Install dependencies
-        run: |
-          gem install mysql2
-          bundle install
 
       - name: Set up database schema
         run: |

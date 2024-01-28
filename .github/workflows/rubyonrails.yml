@@ -41,6 +41,7 @@ jobs:
 
       - name: Set up database schema
         run: |
+          echo "DATABASE_URL: $DATABASE_URL"
           export RAILS_ENV=test
           bin/rails db:create
           bin/rails db:schema:load

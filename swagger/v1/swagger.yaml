@@ -1,0 +1,83 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/pedidos":
+    get:
+      summary: Listar pedidos em producao
+      tags:
+      - Producao
+      responses:
+        '200':
+          description: lista de pedidos em producao
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    num_pedido:
+                      type: integer
+                    status:
+                      type: string
+                  required:
+                  - num_pedido
+                  - status
+    post:
+      summary: Enviar pedido para producao
+      tags:
+      - Producao
+      parameters: []
+      responses:
+        '201':
+          description: Pedido enviado para producao com sucesso
+        '422':
+          description: Unprocessable Entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                num_pedido:
+                  type: integer
+                status:
+                  type: string
+              required:
+              - num_pedido
+              - status
+        required: true
+  "/pedidos/{num_pedido}":
+    parameters:
+    - name: num_pedido
+      in: path
+      description: Número do Pedido
+      required: true
+      schema:
+        type: integer
+    put:
+      summary: Atualizar status do pedido
+      tags:
+      - Producao
+      parameters:
+      - name: status
+        in: query
+        description: Novo status do pedido
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Status do pedido atualizado com sucesso
+        '404':
+          description: Pedido não encontrado
+        '422':
+          description: Unprocessable Entity
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000

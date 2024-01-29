@@ -53,7 +53,7 @@ jobs:
           args: >
             -Dsonar.organization=fiap-tech-challenge-soat1
             -Dsonar.projectKey=fiap-tech-challenge-soat1_fiap-tech-challenge-1-producao
-            -Dsonar.sources=.
+            -Dsonar.sources=app,lib
             -Dsonar.language=ruby
             -Dsonar.exclusions=**/*_spec.rb,spec/**/*,config/**/*,vendor/**/*
             -Dsonar.verbose=true

@@ -17,6 +17,27 @@ jobs:
           ruby-version: '3.2.2'
           bundler-cache: true
 
+      - name: Run coverage
+        env:
+          COVERAGE: true
+        run: |
+          bundle exec rspec
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        with:
+          args: >
+            -Dsonar.organization=fiap-tech-challenge-soat1
+            -Dsonar.projectKey=fiap-tech-challenge-soat1_fiap-tech-challenge-1-producao
+            -Dsonar.sources=app/,lib/
+            -Dsonar.language=ruby
+            -Dsonar.exclusions=**/*_spec.rb,spec/**/*,config/**/*,vendor/**/*
+            -Dsonar.coverageReportPaths=coverage/
+            -Dsonar.verbose=true
+            -Dsonar.qualitygate.wait=true
+        env:
+          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+
       - name: Setup Docker
         uses: docker/setup-buildx-action@v1
 

@@ -52,7 +52,7 @@ test:
 #
 production:
   <<: *default
-  database: fiap_producao_api_production
-  username: fiap_producao_api
+  database: <%= ENV["FIAP_PRODUCAO_API_DATABASE"] %>
+  username: <%= ENV["FIAP_PRODUCAO_API_USER"] %>
   password: <%= ENV["FIAP_PRODUCAO_API_DATABASE_PASSWORD"] %>
   socket: <%= ENV["FIAP_PRODUCAO_API_DATABASE_SOCKET"] %>

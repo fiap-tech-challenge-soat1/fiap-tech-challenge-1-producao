@@ -11,6 +11,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Install dependencies and run coverage
+        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
+        with:
+          ruby-version: '3.2.2'
+          bundler-cache: true
+        env:
+          COVERAGE: true
+        run: |
+          bundle exec rspec
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         with:

@@ -57,6 +57,7 @@ jobs:
             -Dsonar.language=ruby
             -Dsonar.exclusions=**/*_spec.rb,spec/**/*,config/**/*,vendor/**/*
             -Dsonar.verbose=true
+            -Dsonar.ruby.coverage.reportPaths=coverage/coverage.json
             -Dsonar.qualitygate.wait=true
         env:
           SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}

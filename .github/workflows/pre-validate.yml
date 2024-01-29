@@ -21,52 +21,12 @@ jobs:
       #       -Dsonar.sources=src/
       #       -Dsonar.exclusions=**/*.spec.ts
       #       -Dsonar.verbose=true
+      #       -Dsonar.qualitygate.wait=true
       #   env:
       #     SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
-
-      - name: Compute revision
-        id: revision
-        run: echo "sha_short=v$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Setup Docker
         uses: docker/setup-buildx-action@v1
 
       - name: Build Docker Image
-        run: docker build -t producao-service-tech-challenge:${{ steps.revision.outputs.sha_short }} .
-
-      - name: Setup gcloud
-        uses: google-github-actions/setup-gcloud@v0.3.0
-        with:
-          project_id: ${{vars.PROJECT_ID}}
-          service_account_key: ${{secrets.SERVICE_ACCOUNT_KEY}}
-          export_default_credentials: true
-
-      - name: Auth gcloud docker
-        run: gcloud auth configure-docker
-
-      - name: Push docker image to gcp container registry
-        env:
-          REVISION: 2.1
-        run: |-
-          docker tag producao-service-tech-challenge:${{ steps.revision.outputs.sha_short }} gcr.io/${{vars.PROJECT_ID}}/producao-service-tech-challenge:${{ steps.revision.outputs.sha_short }}
-          docker push gcr.io/${{vars.PROJECT_ID}}/producao-service-tech-challenge:${{ steps.revision.outputs.sha_short }}
-
-      - name: Deploy to CloudRun
-        uses: google-github-actions/deploy-cloudrun@v1
-        with:
-          flags: ${{vars.DEPLOY_CONFIGS}}
-          env_vars: |
-            RAILS_ENV=production
-            PEDIDOS_API_URL=${{vars.PEDIDOS_API_URL}}
-            SECRET_KEY_BASE=${{vars.SECRET_KEY_BASE}}
-            DB_HOST=1
-            DB_USER=1
-            DB_PASSWORD=1
-          secrets: |
-            FIAP_PRODUCAO_API_DATABASE_SOCKET=${{vars.DEPLOY_DB_HOST_SECRET_NAME}}
-            FIAP_PRODUCAO_API_DATABASE_PASSWORD=${{vars.DEPLOY_DB_PASSWORD_SECRET_NAME}}
-            FIAP_PRODUCAO_API_USER=${{vars.DEPLOY_DB_USER_SECRET_NAME}}
-            FIAP_PRODUCAO_API_DATABASE=${{vars.DEPLOY_DB_DATABASE_SECRET_NAME}}
-          service: ${{vars.SERVICE_NAME}}
-          image: gcr.io/${{vars.PROJECT_ID}}/producao-service-tech-challenge:${{ steps.revision.outputs.sha_short }}
-          region: ${{vars.DEPLOY_REGION}}
+        run: docker build -t producao-service-tech-challenge:$GITHUB_SHA .

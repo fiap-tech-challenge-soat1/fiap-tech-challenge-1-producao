@@ -59,7 +59,7 @@ jobs:
             -Dsonar.sources=app/,lib/
             -Dsonar.language=ruby
             -Dsonar.exclusions=**/*_spec.rb,spec/**/*,config/**/*,vendor/**/*
-            -Dsonar.coverageReportPaths=coverage/lcov.info
+            -Dsonar.coverageReportPaths=coverage/
             -Dsonar.verbose=true
             -Dsonar.qualitygate.wait=true
         env:

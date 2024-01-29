@@ -13,7 +13,7 @@ class Pedido < ApplicationRecord
 
   after_update :notificar_pedidos_api, if: :finalizado?
 
-  has_many :itens, class_name: "Item"
+  has_many :itens, class_name: "Item", dependent: :destroy
   accepts_nested_attributes_for :itens
 
   private

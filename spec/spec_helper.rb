@@ -92,9 +92,9 @@ RSpec.configure do |config|
 end
 
 # Generate Coverage Report
-if ENV['COVERAGE'] == 'true'
-  require 'simplecov'
+if ENV["COVERAGE"] == "true"
+  require "simplecov"
   require "simplecov_json_formatter"
-  SimpleCov.start 'rails'
+  SimpleCov.start "rails"
   SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
 end

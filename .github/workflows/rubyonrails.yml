@@ -50,6 +50,19 @@ jobs:
           export COVERAGE=true
           bin/rake
 
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        with:
+          args: >
+            -Dsonar.organization=fiap-tech-challenge-soat1
+            -Dsonar.projectKey=fiap-tech-challenge-soat1_fiap-tech-challenge-1-producao
+            -Dsonar.sources=app/,lib/
+            -Dsonar.language=ruby
+            -Dsonar.exclusions=**/*_spec.rb,spec/**/*,config/**/*,vendor/**/*
+            -Dsonar.coverageReportPaths=coverage/lcov.info
+            -Dsonar.verbose=true
+            -Dsonar.qualitygate.wait=true
+
   lint:
     runs-on: ubuntu-latest
     steps:

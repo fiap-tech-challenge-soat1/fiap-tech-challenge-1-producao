@@ -15,7 +15,6 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@master
         with:
           args: >
-            -Dsonar.analysis.mode=preview
             -Dsonar.organization=fiap-tech-challenge-soat1
             -Dsonar.projectKey=fiap-tech-challenge-soat1_fiap-tech-challenge-1-producao
             -Dsonar.sources=app/,lib/

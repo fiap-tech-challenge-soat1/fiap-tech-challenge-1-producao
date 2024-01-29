@@ -47,10 +47,10 @@ jobs:
       - name: Print Coverage Report(DEBUG)
         run: cat coverage/coverage.json
 
-      - name: Print Working Directory
+      - name: Fix coverage path
+        working-directory: ./coverage
         run: |
-          pwd
-          ls -R
+          sed -i 's@'$GITHUB_WORKSPACE'@/github/workspace/@g' coverage.json
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master

@@ -90,3 +90,11 @@ RSpec.configure do |config|
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
 end
+
+# Generate Coverage Report
+if ENV['COVERAGE'] == 'true'
+  require 'simplecov'
+  require "simplecov_json_formatter"
+  SimpleCov.start 'rails'
+  SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
+end

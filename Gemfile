@@ -54,6 +54,7 @@ group :development, :test do
   gem "bundle-audit"
   gem "brakeman"
   gem "simplecov"
+  gem "simplecov-lcov"
 end
 
 group :test do

@@ -94,7 +94,17 @@ end
 # Generate Coverage Report
 if ENV["COVERAGE"] == "true"
   require "simplecov"
-  require "simplecov_json_formatter"
+  require "simplecov-lcov"
+
+  SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
+  SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
+
+
+  SimpleCov::Formatter::LcovFormatter.config do |c|
+    c.output_directory = 'coverage' # default: "coverage/lcov"
+    c.lcov_file_name = 'lcov.info' # default: "YOUR_PROJECT_NAME.lcov"
+    c.single_report_path = 'coverage/lcov.info'
+  end  
+
   SimpleCov.start "rails"
-  SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
 end

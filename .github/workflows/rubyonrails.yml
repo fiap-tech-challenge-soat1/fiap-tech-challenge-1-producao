@@ -45,8 +45,10 @@ jobs:
           bin/rails db:create
           bin/rails db:schema:load
 
-      - name: Run tests
-        run: bin/rake
+      - name: Run tests with coverage reports
+        run: |
+          export COVERAGE=true
+          bin/rake
 
   lint:
     runs-on: ubuntu-latest

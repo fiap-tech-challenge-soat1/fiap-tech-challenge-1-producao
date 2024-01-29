@@ -11,18 +11,43 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      # - name: SonarCloud Scan
-      #   uses: SonarSource/sonarcloud-github-action@master
-      #   with:
-      #     args: >
-      #       -Dsonar.organization=fiap-tech-challenge-soat1
-      #       -Dsonar.projectKey=fiap-tech-challenge-soat1_fiap-tech-challenge-1-pedidos
-      #       -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
-      #       -Dsonar.sources=src/
-      #       -Dsonar.exclusions=**/*.spec.ts
-      #       -Dsonar.verbose=true
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
+        with:
+          ruby-version: '3.2.2'
+          bundler-cache: true
+
+      - name: Set up database schema
+        run: |
+          export RAILS_ENV=test
+          bin/rails db:create
+          bin/rails db:schema:load
+
+      - name: Run tests with coverage reports
+        run: |
+          export COVERAGE=true
+          bin/rake
+
+      - name: Fix coverage path
+        working-directory: ./coverage
+        run: |
+          sed -i 's@'$GITHUB_WORKSPACE'@/github/workspace/@g' coverage.json
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        with:
+          args: >
+            -Dsonar.organization=fiap-tech-challenge-soat1
+            -Dsonar.projectKey=fiap-tech-challenge-soat1_fiap-tech-challenge-1-producao
+            -Dsonar.sources=.
+            -Dsonar.language=ruby
+            -Dsonar.exclusions=**/*_spec.rb,spec/**/*,config/**/*,vendor/**/*
+            -Dsonar.verbose=true
+            -Dsonar.ruby.coverage.reportPaths=coverage/coverage.json
+            -Dsonar.qualitygate.wait=true
+        env:
+          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+          SONAR_SCANNER_OPTS: --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED
 
       - name: Compute revision
         id: revision

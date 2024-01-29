@@ -44,9 +44,6 @@ jobs:
           export COVERAGE=true
           bin/rake
 
-      - name: Print Coverage Report(DEBUG)
-        run: cat coverage/coverage.json
-
       - name: Fix coverage path
         working-directory: ./coverage
         run: |
@@ -87,7 +84,12 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    if: ${{ always() && contains(join(needs.*.result, ','), 'success')}}
+    needs: [test,lint]
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Setup Docker
         uses: docker/setup-buildx-action@v1
 

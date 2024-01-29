@@ -8,3 +8,10 @@ inherit_gem:
 
 AllCops:
   NewCops: enable
+
+RSpec/ContextWording:
+  Enabled: false
+RSpec/AnyInstance: 
+  Enabled: false
+RSpec/EmptyExampleGroup:
+  Enabled: false

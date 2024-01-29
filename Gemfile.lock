@@ -82,7 +82,14 @@ GEM
     bigdecimal (3.1.6)
     bootsnap (1.17.1)
       msgpack (~> 1.2)
+    brakeman (6.1.1)
+      racc
     builder (3.2.4)
+    bundle-audit (0.1.0)
+      bundler-audit
+    bundler-audit (0.9.1)
+      bundler (>= 1.2.0, < 3)
+      thor (~> 1.0)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     crack (0.4.5)
@@ -99,6 +106,7 @@ GEM
       irb (~> 1.10)
       reline (>= 0.3.8)
     diff-lcs (1.5.0)
+    docile (1.4.0)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -284,6 +292,12 @@ GEM
     ruby2_keywords (0.0.5)
     shoulda-matchers (6.1.0)
       activesupport (>= 5.2.0)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.12.3)
+    simplecov_json_formatter (0.1.4)
     standard (1.33.0)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.0)
@@ -322,6 +336,8 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
+  brakeman
+  bundle-audit
   database_cleaner
   debug
   dotenv-rails
@@ -338,6 +354,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   shoulda-matchers
+  simplecov
   standard
   tzinfo-data
   webmock

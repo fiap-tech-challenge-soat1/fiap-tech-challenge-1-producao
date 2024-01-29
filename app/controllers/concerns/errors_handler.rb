@@ -10,7 +10,7 @@ module ErrorsHandler
   private
 
   def render_not_found(messages = "Not found")
-    messages = "Não encontrado" unless messages.is_a?(String) || messages.is_a?(Array)
+    messages = "Registro não encontrado" unless messages.is_a?(String) || messages.is_a?(Array)
 
     render json: {errors: Array.wrap(messages)}, status: :not_found
   end

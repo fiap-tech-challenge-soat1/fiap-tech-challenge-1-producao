@@ -47,6 +47,11 @@ jobs:
       - name: Print Coverage Report(DEBUG)
         run: cat coverage/coverage.json
 
+      - name: Print Working Directory
+        run: |
+          pwd
+          ls -R
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         with:

@@ -50,11 +50,6 @@ jobs:
           export COVERAGE=true
           bin/rake
 
-      - name: Merge JSON coverage files into LCOV
-        run: |
-          gem install lcov-result-merger
-          lcov-result-merger 'coverage/*.json' -o coverage/lcov.info
-
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         with:

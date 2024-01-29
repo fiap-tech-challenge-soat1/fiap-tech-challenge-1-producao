@@ -57,7 +57,7 @@ jobs:
             -Dsonar.projectKey=fiap-tech-challenge-soat1_fiap-tech-challenge-1-producao
             -Dsonar.sources=.
             -Dsonar.language=ruby
-            -Dsonar.exclusions=**/*_spec.rb,spec/**/*,config/**/*,vendor/**/*
+            -Dsonar.exclusions=**/*_spec.rb,spec/**/*,config/**/*,vendor/**/*,db/**/*,app/channels/**/*
             -Dsonar.verbose=true
             -Dsonar.ruby.coverage.reportPaths=coverage/coverage.json
             -Dsonar.qualitygate.wait=true

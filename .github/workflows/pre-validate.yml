@@ -56,7 +56,6 @@ jobs:
             -Dsonar.sources=.
             -Dsonar.language=ruby
             -Dsonar.exclusions=**/*_spec.rb,spec/**/*,config/**/*,vendor/**/*
-            -Dsonar.coverageReportPaths=coverage/coverage.json
             -Dsonar.verbose=true
             -Dsonar.qualitygate.wait=true
         env:

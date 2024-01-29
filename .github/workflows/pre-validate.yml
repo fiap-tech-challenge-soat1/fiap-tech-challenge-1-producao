@@ -44,6 +44,9 @@ jobs:
           export COVERAGE=true
           bin/rake
 
+      - name: Print Coverage Report(DEBUG)
+        run: cat coverage/coverage.json
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         with:

@@ -1,22 +1,3 @@
-# README
+  # Produção
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+Serviço parte do projeto de Tech Challenge da FIAP, para mais informações consulte o [README.me](https://github.com/fiap-tech-challenge-soat1/fiap-tech-challenge-1-pedidos/blob/main/README.md) do projeto principal.
